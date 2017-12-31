@@ -17,6 +17,8 @@ Copy Assets/PropertyChecker to your project and you're good to go. The extension
 All fields are expected to have a value, unless the field has "Optional" attribute.
 
 ```C#
+using UnityEngine;
+using PropertyChecker;
 
 public class TestScript : MonoBehaviour {
 
