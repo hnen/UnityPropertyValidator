@@ -10,8 +10,17 @@ namespace PropertyChecker {
     public class PropertyCheckedEditor : Editor {
 
         public override void OnInspectorGUI() {
-            DrawPropertyCheckerHeader();
-            DrawInspector();
+            if (IsEnabledForObject()) {
+                DrawPropertyCheckerHeader();
+                DrawInspector();
+            } else {
+                base.DrawDefaultInspector();
+            }
+        }
+
+        bool IsEnabledForObject() {
+            var type = PrefabUtility.GetPrefabType(this.target);
+            return type == PrefabType.None || type == PrefabType.PrefabInstance || type == PrefabType.DisconnectedPrefabInstance;
         }
 
         void DrawPropertyCheckerHeader() {
@@ -53,7 +62,6 @@ namespace PropertyChecker {
 
         void DrawProperty(object instance, SerializedProperty property) {
             var propertyInfo = PropertyChecker.GetPropertyInfo(instance, property);
-            //EditorGUILayout.LabelField(string.Format("isOptional: {0}, hasAssignedValue: {1}", propertyInfo.IsOptional, propertyInfo.HasAssignedValue));
             if (propertyInfo.IsOptional) {
                 DrawOptionalProperty(property);
             } else {
