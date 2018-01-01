@@ -30,12 +30,25 @@ namespace PropertyChecker {
                 bool enterChildren = true;
                 while (iterator.NextVisible(enterChildren)) {
                     using (new EditorGUI.DisabledScope("m_Script" == iterator.propertyPath)) {
+                        var oval = GetPropertyValue(iterator);
                         DrawProperty(this.target, iterator);
+                        var nval = GetPropertyValue(iterator);
+                        if (oval != nval) {
+                            PropertyMonitor.OnPropertyChanged(obj, iterator);
+                        }
                     }
                     enterChildren = false;  
                 }
                 obj.ApplyModifiedProperties();  
-            EditorGUI.EndChangeCheck();   
+            EditorGUI.EndChangeCheck();               
+        }
+
+        static object GetPropertyValue(SerializedProperty sp) {
+            if (sp.propertyType == SerializedPropertyType.ObjectReference) {
+                return sp.objectReferenceValue;
+            } else {
+                return null;
+            }
         }
 
         void DrawProperty(object instance, SerializedProperty property) {
