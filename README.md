@@ -11,7 +11,7 @@ The validator assumes that all fields are required to have a value, unless they 
  - Highlight missing references in inspector
  
 ## Known bugs
- - Marks properties in prefabs as missing when. The prefab properties may be intentionally set blank as they are set only after adding to a scene.
+ - Marks properties in prefabs as missing. The prefab properties may be intentionally set blank as they are set only after adding to a scene.
 
 ## Usage
 
