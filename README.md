@@ -16,6 +16,7 @@ The extension, while usable, is still WIP.
 
 ## Known bugs/issues
  - As the extension relies on overriding the default inspector, this may easily conflict with other extension that may do the same.
+ - The extension is now disabled for prefabs, as they may have intentionally blank references since they may be meant to be assigned after adding it to the scene.
  
 
 ## Usage
