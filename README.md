@@ -11,9 +11,12 @@ The extension, while usable, is still WIP.
 
 ## Features
  - Highlight missing references in inspector
+
+ ![Screenshot of object inspector with validator enabled](https://raw.githubusercontent.com/hnen/UnityPropertyValidator/master/doc/readme_img.png)
+
+## Known bugs/issues
+ - As the extension relies on overriding the default inspector, this may easily conflict with other extension that may do the same.
  
-## Known bugs
- - Marks properties in prefabs as missing. The prefab properties may be intentionally set blank as they are set only after adding to a scene.
 
 ## Usage
 
