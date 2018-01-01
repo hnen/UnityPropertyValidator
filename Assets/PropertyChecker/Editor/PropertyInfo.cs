@@ -18,23 +18,25 @@ namespace PropertyChecker {
             throw new System.NotImplementedException();
         }
 
-        public static PropertyInfo Create(object instance, SerializedProperty property) {
-            var type = instance.GetType();
+        public static PropertyInfo GetPropertyInfo(System.Type type, SerializedProperty property, MonoBehaviour [] componentInstances) {
             var field = type.GetField(property.name, 
                             BindingFlags.Instance | 
                             BindingFlags.Public | 
                             BindingFlags.NonPublic);            
 
             var isOptional = field == null || field.GetCustomAttributes(true).Any(a => a is OptionalAttribute);
-            if (property.propertyType == SerializedPropertyType.ObjectReference) {
-                var value = property.objectReferenceValue;
-                return new PropertyInfo(isOptional, value != null);
-            } else if (property.propertyType == SerializedPropertyType.String) {
-                var value = property.stringValue;
-                return new PropertyInfo(isOptional, !string.IsNullOrEmpty(value));
-            } else {
-                return new PropertyInfo(isOptional, true);
+            var isAssigned = field == null || AreAllValuesAssigned(field, componentInstances);
+            return new PropertyInfo(isOptional, isAssigned);
+        }
+
+        static bool AreAllValuesAssigned(FieldInfo field, MonoBehaviour [] instances) {
+            foreach(var instance in instances) {
+                var value = field.GetValue(instance);
+                if (value == null || value.ToString() == "null") {
+                    return false;
+                }
             }
+            return true;
         }
 
     }

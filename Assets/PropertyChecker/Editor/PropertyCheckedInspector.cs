@@ -33,7 +33,8 @@ namespace PropertyChecker {
 
         void DrawInspector() {
             var obj = base.serializedObject;
-            var mb = (MonoBehaviour)base.target;
+            //var mb = (MonoBehaviour)base.target;
+            var mbs = this.targets.Select(a => (MonoBehaviour)a).ToArray();
 
             EditorGUI.BeginChangeCheck();
                 obj.Update();
@@ -42,10 +43,12 @@ namespace PropertyChecker {
                 while (iterator.NextVisible(enterChildren)) {
                     using (new EditorGUI.DisabledScope("m_Script" == iterator.propertyPath)) {
                         var oval = GetPropertyValue(iterator);
-                        DrawProperty(this.target, iterator);
+                        DrawProperty(this.target.GetType(), iterator, mbs);
                         var nval = GetPropertyValue(iterator);
-                        var propertyInfo = PropertyInfo.Create(obj, iterator);
-                        PropertyMonitor.OnPropertyUpdated(mb, iterator, propertyInfo, oval != nval);
+                        var propertyInfo = PropertyInfo.GetPropertyInfo(obj.GetType(), iterator, mbs);
+                        foreach (var mb in mbs) {
+                            PropertyMonitor.OnPropertyUpdated(mb, iterator, propertyInfo, oval != nval);
+                        }
                     }
                     enterChildren = false;  
                 }
@@ -61,8 +64,8 @@ namespace PropertyChecker {
             }
         }
 
-        void DrawProperty(object instance, SerializedProperty property) {
-            var propertyInfo = PropertyInfo.Create(instance, property);
+        void DrawProperty(System.Type componentType, SerializedProperty property, MonoBehaviour [] instances) {
+            var propertyInfo = PropertyInfo.GetPropertyInfo(componentType, property, instances);
             if (propertyInfo.IsOptional) {
                 DrawOptionalProperty(property);
             } else {
