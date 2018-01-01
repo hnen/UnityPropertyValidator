@@ -7,6 +7,7 @@ using System;
 namespace PropertyChecker {
 
     [CustomEditor(typeof(MonoBehaviour), true)]
+    [CanEditMultipleObjects]
     public class PropertyCheckedEditor : Editor {
 
         public override void OnInspectorGUI() {
