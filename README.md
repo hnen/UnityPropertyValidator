@@ -12,7 +12,7 @@ The extension, while usable, is still WIP.
 ## Features
  - Highlight missing references in inspector
 
- ![Screenshot of object inspector with validator enabled](doc/readme_img.png =320x)
+ ![Screenshot of object inspector with validator enabled](./doc/readme_img.png)
 
 ## Known bugs/issues
  - As the extension relies on overriding the default inspector, this may easily conflict with other extension that may do the same.
