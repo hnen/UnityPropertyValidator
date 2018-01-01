@@ -7,8 +7,13 @@ This extension aims to detect these bugs as early as possible to save time and n
 
 The validator assumes that all fields are required to have a value, unless they are explicity marked as optional by the developer.
 
+The extension, while usable, is still WIP.
+
 ## Features
  - Highlight missing references in inspector
+ 
+## Known bugs
+ - Marks properties in prefabs as missing. The prefab properties may be intentionally set blank as they are set only after adding to a scene.
 
 ## Usage
 
