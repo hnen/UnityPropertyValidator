@@ -10,11 +10,18 @@ namespace PropertyChecker {
     public class PropertyCheckedEditor : Editor {
 
         public override void OnInspectorGUI() {
+            DrawPropertyCheckerHeader();
+            DrawInspector();
+        }
+
+        void DrawPropertyCheckerHeader() {
             var style = new GUIStyle(EditorStyles.label);
             style.fontSize = 7;
             style.normal.textColor = Color.gray;
             GUILayout.Label("Property checker enabled.", style);            
+        }
 
+        void DrawInspector() {
             var obj = base.serializedObject;
 
             EditorGUI.BeginChangeCheck();

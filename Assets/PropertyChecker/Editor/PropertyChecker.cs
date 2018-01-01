@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace PropertyChecker {
 
-    class PropertyInfo {
+    internal class PropertyInfo {
         public bool IsOptional { get; private set; }
         public bool HasAssignedValue { get; private set; }
 
@@ -15,7 +15,7 @@ namespace PropertyChecker {
         }
     }
 
-    class PropertyChecker {
+   internal class PropertyChecker {
 
         public static PropertyInfo GetPropertyInfo(object instance, SerializedProperty property) {
             var type = instance.GetType();
