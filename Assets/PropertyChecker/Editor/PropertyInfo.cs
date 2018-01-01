@@ -9,15 +9,16 @@ namespace PropertyChecker {
         public bool IsOptional { get; private set; }
         public bool HasAssignedValue { get; private set; }
 
-        public PropertyInfo(bool isOptional, bool hasAssignedValue) {
+        PropertyInfo(bool isOptional, bool hasAssignedValue) {
             this.IsOptional = isOptional;
             this.HasAssignedValue = hasAssignedValue;
         }
-    }
 
-   internal class PropertyChecker {
+        public static PropertyInfo [] Create(MonoBehaviour component) {
+            throw new System.NotImplementedException();
+        }
 
-        public static PropertyInfo GetPropertyInfo(object instance, SerializedProperty property) {
+        public static PropertyInfo Create(object instance, SerializedProperty property) {
             var type = instance.GetType();
             var field = type.GetField(property.name, 
                             BindingFlags.Instance | 

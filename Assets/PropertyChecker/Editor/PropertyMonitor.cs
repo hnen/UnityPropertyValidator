@@ -10,11 +10,18 @@ namespace PropertyChecker {
         }
 
         static void OnUnityHierarchyWindowChanged() {
-            Debug.LogWarning("HIERARCHY WINDOW CHANGED");
+            //Debug.LogWarning("HIERARCHY WINDOW CHANGED");
         }
 
-        public static void OnPropertyChanged(object instance, SerializedProperty property) {
-            Debug.LogWarning("PROPERTY " + property.name + " CHANGED");
+        [UnityEditor.Callbacks.DidReloadScripts]
+        private static void OnScriptsReloaded() {
+            //Debug.LogWarning("SCRIPTS RELOADED");
+            PropertyContainer.Instance.Reset();
+        }
+
+        public static void OnPropertyUpdated(MonoBehaviour instance, SerializedProperty property, PropertyInfo info, bool valueChanged) {
+            //Debug.LogWarning("PROPERTY " + property.name + " CHANGED");            
+            PropertyContainer.Instance.Register(info, instance, property.name);
         }
 
     }
