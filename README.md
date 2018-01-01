@@ -15,6 +15,7 @@ The extension, while usable, is still WIP.
  ![Screenshot of object inspector with validator enabled](./doc/readme_img.png)
 
 ## Known bugs/issues
+ - Multi-object editing support not yet implemented
  - As the extension relies on overriding the default inspector, this may easily conflict with other extension that may do the same.
  - The extension is now disabled for prefabs, as they may have intentionally blank references since they may be meant to be assigned after adding it to the scene.
  
