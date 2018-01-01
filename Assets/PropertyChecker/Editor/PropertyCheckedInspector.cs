@@ -40,7 +40,7 @@ namespace PropertyChecker {
                 bool enterChildren = true;
                 while (iterator.NextVisible(enterChildren)) {
                     using (new EditorGUI.DisabledScope("m_Script" == iterator.propertyPath)) {
-                        DrawProperty(this.target, iterator);
+                        DrawProperty(this.target.GetType(), iterator, this.targets.Select(a => (MonoBehaviour)a).ToArray());
                     }
                     enterChildren = false;  
                 }
@@ -48,8 +48,8 @@ namespace PropertyChecker {
             EditorGUI.EndChangeCheck();   
         }
 
-        void DrawProperty(object instance, SerializedProperty property) {
-            var propertyInfo = PropertyChecker.GetPropertyInfo(instance, property);
+        void DrawProperty(System.Type componentType, SerializedProperty property, MonoBehaviour [] instances) {
+            var propertyInfo = PropertyChecker.GetPropertyInfo(componentType, property, instances);
             if (propertyInfo.IsOptional) {
                 DrawOptionalProperty(property);
             } else {
