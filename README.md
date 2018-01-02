@@ -45,6 +45,7 @@ public class TestScript : MonoBehaviour {
 ``` 
 
 ## Upcoming features
+ - Reorganize folder structure: separate example project from the extension. Maintain a DLL from extension.
  - Scan the scene for missing references on load, keep track of them when scene is edited.
  - Emit errors from missing references.
  - Prevent starting the game if there are unassigned fields.
