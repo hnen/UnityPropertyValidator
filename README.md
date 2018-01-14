@@ -7,7 +7,7 @@ This extension aims to detect these bugs as early as possible to save time and n
 
 The validator assumes that all fields are required to have a value, unless they are explicity marked as optional by the developer.
 
-The extension, while usable, is still WIP.
+The extension, while probably usable, is still WIP and not tested in practice.
 
 ## Features
  - Highlight missing references in inspector
@@ -15,6 +15,7 @@ The extension, while usable, is still WIP.
  ![Screenshot of object inspector with validator enabled](./doc/readme_img.png)
 
 ## Known bugs/issues
+ - Not tested for arrays and serializable structs.
  - As the extension relies on overriding the default inspector, this may easily conflict with other extension that may do the same.
  - The extension is now disabled for prefabs, as they may have intentionally blank references since they may be meant to be assigned after adding it to the scene.
  
@@ -45,6 +46,7 @@ public class TestScript : MonoBehaviour {
 ``` 
 
 ## Upcoming features
+ - Create NUnit tests for missing values.
  - Reorganize folder structure: separate example project from the extension. Maintain a DLL from extension.
  - Scan the scene for missing references on load, keep track of them when scene is edited.
  - Emit errors from missing references.
